@@ -1,0 +1,23 @@
+<!-- friends.html -->
+<h1>Your Friends</h1>
+
+<!-- Form to add a friend -->
+<form method="POST" action="/friends">
+    <label for="friend_code">Enter Friend Code:</label>
+    <input type="text" id="friend_code" name="friend_code" required>
+    <button type="submit">Add Friend</button>
+</form>
+
+<ul>
+    {% for friend in friends %}
+        <li>
+            {{ friend.friend_name }} - 
+            <a href="{{ url_for('friends') }}?remove_friend_id={{ friend.friend_id }}">Remove Friend</a>
+            <ul>
+                {% for track in friend.friend_tracks %}
+                    <li>{{ track.name }} by {{ track.artist }} (Album: {{ track.album }})</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>

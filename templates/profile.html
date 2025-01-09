@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+</head>
+<body>
+    <h1>Welcome to Your Spotify Profile</h1>
+    
+    <h2>Your User Key is: {{ user_key }}</h2>
+
+
+    
+    <!-- Form to add friends by their friend code -->
+    <div class="friend-form">
+        <form action="/add_friend" method="POST">
+            <input type="text" name="friend_code" placeholder="Enter friend's code" required>
+            <button type="submit">Add Friend</button>
+        </form>
+    </div>
+
+    <h3>Your Recently Played Tracks</h3>
+    <div class="recent-tracks">
+        <ul>
+            {% if tracks %}
+                {% for track in tracks %}
+                    <li>
+                        <strong>{{ track['name'] }}</strong> by {{ track['artist'] }} (Album: {{ track['album'] }})
+                    </li>
+                {% endfor %}
+            {% else %}
+                <p>No recently played tracks found.</p>
+            {% endif %}
+        </ul>
+    </div>
+
+    <form action="{{ url_for('logout') }}" method="POST">
+        <button type="submit">Logout</button>
+    </form>
+    
+</body>
+</html>
